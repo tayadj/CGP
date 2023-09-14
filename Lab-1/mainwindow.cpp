@@ -315,20 +315,35 @@ void MainWindow::MenuOption_Slot()
 void MainWindow::OptionsGenerate()
 {
     qDebug() << OptionsCurrent << "   " << OptionsCurrent->size();
+    Info->setVisible(false);
+    Options->setVisible(false);
+
+    for (qint32 i = 0; i < OptionsCurrent->size(); ++i)
+    {
+        QGroupBox* ModelTable = new QGroupBox();
+        ModelTable->setGeometry(520, 120 + i * 200, 800, 180);
+        ModelTable->setObjectName(QString("ModelTable-%1").arg(i));
+        ModelTable->setStyleSheet(QString("#ModelTable-%1 {"
+                                          "   background-color: #f8f8f8;"
+                                          "   border-radius: 10px;"
+                                          "}").arg(i));
+        OptionsElements->push_back(*ModelTable);
+    }
+    this->update();
 }
 
 void MainWindow::OptionRGB_Slot()
 {
-    //QVector<QString>::iterator it = std::find_if(OptionsCurrent->begin(), OptionsCurrent->end(),
-    //                                             [](const QString& Elem){return Elem.startsWith("RGB");});
+    QVector<QString>::iterator it = std::find_if(OptionsCurrent->begin(), OptionsCurrent->end(),
+                                                 [](const QString& Elem){return Elem.startsWith("RGB");});
 
-    //if (it != OptionsCurrent->end())
+    if (it == OptionsCurrent->end())
     {
         OptionsCurrent->push_back(QString("RGB"));
     }
-    //else
+    else
     {
-        //OptionsCurrent->erase(it);
+        OptionsCurrent->erase(it);
     }
 
     OptionsGenerate();

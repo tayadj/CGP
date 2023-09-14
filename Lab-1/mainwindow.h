@@ -21,26 +21,27 @@ class MainWindow : public QMainWindow
         void OptionsGenerate();
 
     private:
-        QColor              CurrentColor;
+        QColor                CurrentColor;
 
-        QGroupBox*          Tab;
-        QLabel*             Title;
+        QGroupBox*            Tab;
+        QLabel*               Title;
 
-        QGroupBox*          Menu;
-        QPushButton*        MenuOption;
-        QPushButton*        MenuColor;
-        QPushButton*        MenuInfo;
+        QGroupBox*            Menu;
+        QPushButton*          MenuOption;
+        QPushButton*          MenuColor;
+        QPushButton*          MenuInfo;
 
-        QGroupBox*          States;
-        QLabel*             CurrentState;
+        QGroupBox*            States;
+        QLabel*               CurrentState;
 
-        QGroupBox*          Info;
-        QLabel*             InfoTitle;
-        QLabel*             InfoText;
+        QGroupBox*            Info;
+        QLabel*               InfoTitle;
+        QLabel*               InfoText;
 
-        QGroupBox*          Options;
-        QVector<QString>*   OptionsCurrent = new QVector<QString>;
-        QPushButton*        OptionRGB;
+        QGroupBox*            Options;
+        QVector<QString>*     OptionsCurrent = new QVector<QString>;
+        QVector<QWidget>*     OptionsElements;
+        QPushButton*          OptionRGB;
 
 
 
