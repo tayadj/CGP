@@ -15,26 +15,34 @@ class MainWindow : public QMainWindow
         void MenuInfo_Slot();
         void MenuColor_Slot();
         void MenuOption_Slot();
+        void OptionRGB_Slot();
+
+    protected:
+        void OptionsGenerate();
 
     private:
-        QGroupBox*      Tab;
-        QLabel*         Title;
+        QColor              CurrentColor;
 
-        QGroupBox*      Menu;
-        QPushButton*    MenuOption;
-        QPushButton*    MenuColor;
-        QPushButton*    MenuInfo;
+        QGroupBox*          Tab;
+        QLabel*             Title;
 
-        QGroupBox*      States;
-        QLabel*         CurrentState;
+        QGroupBox*          Menu;
+        QPushButton*        MenuOption;
+        QPushButton*        MenuColor;
+        QPushButton*        MenuInfo;
 
-        QGroupBox*      Info;
-        QLabel*         InfoTitle;
-        QLabel*         InfoText;
+        QGroupBox*          States;
+        QLabel*             CurrentState;
 
-        QGroupBox*      Options;
+        QGroupBox*          Info;
+        QLabel*             InfoTitle;
+        QLabel*             InfoText;
 
-        QColor          CurrentColor;
+        QGroupBox*          Options;
+        QVector<QString>*   OptionsCurrent = new QVector<QString>;
+        QPushButton*        OptionRGB;
+
+
 
 
 

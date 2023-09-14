@@ -21,9 +21,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     MenuOption = new QPushButton(Menu);
     MenuOption->setObjectName(QString("MenuOption"));
-    MenuOption->setText(QString("Change model"));
+    MenuOption->setText(QString("Edit models"));
     MenuOption->setFont(QFont("Segoe UI Black",16));
-    MenuOption->setGeometry(QRect(0,0,236,60));
+    MenuOption->setGeometry(QRect(0,0,196,60));
     MenuOption->setStyleSheet(QString("#MenuOption:hover {"
                                       "    background-color: #f8f8f8;"
                                       "}"));
@@ -87,6 +87,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     Options->setGeometry(QRect(520,120,800,360));
     Options->setStyleSheet(QString("background-color: #f8f8f8;"
                                    "border-radius: 10px;"));
+
+    OptionRGB = new QPushButton(Options);
+    OptionRGB->setObjectName("OptionRGB");
+    OptionRGB->setGeometry(QRect(20,20,180,80));
+    OptionRGB->setFont(QFont("Segoe UI Black",12));
+    OptionRGB->setText("RGB");
+    OptionRGB->setStyleSheet(QString("#OptionRGB {"
+                                     "  background-color: #fdfdfd;"
+                                     "  border-radius: 10px;"
+                                     "}"
+                                     "#OptionRGB:hover {"
+                                     "  background-color: #fbfbfb;"
+                                     "}"));
+    connect(OptionRGB,SIGNAL(clicked()),this,SLOT(OptionRGB_Slot()));
+
 
 
     /*AlertMenu = new QGroupBox(this);
@@ -281,8 +296,13 @@ void MainWindow::MenuColor_Slot()
     if (Color.isValid())
     {
         CurrentColor = Color;
+        CurrentState->setText(QString("Color has been chosen"));
+        qDebug() << Color;
     }
-    CurrentState->setText(QString("Color has been chosen"));
+    else
+    {
+        CurrentState->setText(QString("Color hasn't been chosen"));
+    }
 }
 
 void MainWindow::MenuOption_Slot()
@@ -292,4 +312,25 @@ void MainWindow::MenuOption_Slot()
     CurrentState->setText(QString("Choose the option to continue"));
 }
 
+void MainWindow::OptionsGenerate()
+{
+    qDebug() << OptionsCurrent << "   " << OptionsCurrent->size();
+}
+
+void MainWindow::OptionRGB_Slot()
+{
+    //QVector<QString>::iterator it = std::find_if(OptionsCurrent->begin(), OptionsCurrent->end(),
+    //                                             [](const QString& Elem){return Elem.startsWith("RGB");});
+
+    //if (it != OptionsCurrent->end())
+    {
+        OptionsCurrent->push_back(QString("RGB"));
+    }
+    //else
+    {
+        //OptionsCurrent->erase(it);
+    }
+
+    OptionsGenerate();
+}
 
