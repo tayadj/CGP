@@ -2,79 +2,52 @@
 #define MAINWINDOW_H
 
 #include <QtWidgets>
+#include "modalwindow.h"
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
     public:
-        MainWindow(QWidget *parent = nullptr);
+        explicit MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
 
-    protected slots:
-        void MenuInfo_Slot();
-        void MenuColor_Slot();
-        void MenuOption_Slot();
-        void OptionRGB_Slot();
+        QColor                      getColor();
+        void                        setColor(QColor);
+        void                        GenerateModals();
 
-    protected:
-        void OptionsGenerate();
+    protected slots:
+        void                        MenuModals_Slot();
+        void                        MenuModalsOptions_Slot();
+        void                        MenuInfo_Slot();
+        void                        MenuColor_Slot();
 
     private:
-        QColor                CurrentColor;
+        QColor                      CurrentColor = QColor(0,0,0);
 
-        QGroupBox*            Tab;
-        QLabel*               Title;
+        QGroupBox*                  Tab;
+        QLabel*                     Title;
 
-        QGroupBox*            Menu;
-        QPushButton*          MenuOption;
-        QPushButton*          MenuColor;
-        QPushButton*          MenuInfo;
+        QGroupBox*                  Menu;
+        QPushButton*                MenuModals;
+        QPushButton*                MenuColor;
+        QPushButton*                MenuInfo;
 
-        QGroupBox*            States;
-        QLabel*               CurrentState;
+        QGroupBox*                  Info;
+        QLabel*                     InfoTitle;
+        QLabel*                     InfoText;
 
-        QGroupBox*            Info;
-        QLabel*               InfoTitle;
-        QLabel*               InfoText;
+        QGroupBox*                  MenuModalsOptions;
+        QPushButton*                MenuModalsOptionsRGB;
+        QPushButton*                MenuModalsOptionsCMYK;
+        QPushButton*                MenuModalsOptionsHSV;
+        QPushButton*                MenuModalsOptionsHLS;
+        QPushButton*                MenuModalsOptionsXYZ;
+        QPushButton*                MenuModalsOptionsLAB;
 
-        QGroupBox*            Options;
-        QVector<QString>*     OptionsCurrent = new QVector<QString>;
-        QVector<QWidget>*     OptionsElements;
-        QPushButton*          OptionRGB;
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*QGroupBox*    Game;
-        QLabel*       InputDescription;
-        QLineEdit*    Input;
-        QPushButton*  SendInput;
-        QTableWidget* GameStory;
-        QGroupBox*    GameStoryWrapper;
-        QGroupBox*    SetRecord;
-        QLabel*       SetRecordText;
-        QLabel*       SetRecordTitle;
-        QLineEdit*    SetRecordForm;
-        QPushButton*  SetRecordButton;
-        QGroupBox*    Finish;
-        QPushButton*  FinishSave;
-        QPushButton*  FinishCancel;
-        QLabel*       FinishTitle;
-        QLabel*       FinishText;
-        QGroupBox*    AlertMenu;
-        QLabel*       AlertMenuTitle;
-        QLabel*       AlertMenuText;
-        QPushButton*  AlertBack;*/
+        QGroupBox*                  Modals;
+        QVector<QString>*           ModalList = new QVector<QString>;
+        QHBoxLayout*                ModalLayout;
 };
 
 #endif
