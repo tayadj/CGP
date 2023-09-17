@@ -11,8 +11,8 @@ class ModalWindow : public QGroupBox
         explicit ModalWindow(QWidget *parent = 0, QString Type = "");
         ~ModalWindow();
 
-    protected:
         void       ReceiveColor();
+        void       SendColor(QColor*);
         void       RecalculateColor(QColor);
 
     protected slots:
@@ -20,6 +20,7 @@ class ModalWindow : public QGroupBox
 
     private:
         QColor     CurrentColor;
+        QColor     NewColor;
 
         QLineEdit* RedInput;
         QLineEdit* GreenInput;

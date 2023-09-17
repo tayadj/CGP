@@ -176,12 +176,11 @@ MainWindow::~MainWindow()
 
 QColor MainWindow::getColor()
 {
-    return CurrentColor;
+    return this->CurrentColor;
 }
 
-void MainWindow::setColor(QColor CurrentColor)
+void MainWindow::setColor(QColor Color)
 {
-    this->CurrentColor = CurrentColor;
 }
 
 void MainWindow::MenuModals_Slot()
@@ -333,7 +332,7 @@ void MainWindow::MenuColor_Slot()
     QColor Color = QColorDialog::getColor();
     if (Color.isValid())
     {
-        CurrentColor = Color;
+        this->CurrentColor = Color;
         GenerateModals();
     }
 }
@@ -342,11 +341,9 @@ void MainWindow::GenerateModals()
 {
     QLayoutItem* Item;
     while((Item = ModalLayout->takeAt(0))) {
-        qDebug() << "Generate Modals" << ' ' << Item;
         delete Item->widget();
         delete Item;
     }
-    qDebug() << "";
 
     for (int i = 0; i < ModalList->size(); ++i)
     {

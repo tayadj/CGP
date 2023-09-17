@@ -23,7 +23,7 @@ class MainWindow : public QMainWindow
         void                        MenuColor_Slot();
 
     private:
-        QColor                      CurrentColor = QColor(0,0,0);
+        QColor                      CurrentColor;
 
         QGroupBox*                  Tab;
         QLabel*                     Title;

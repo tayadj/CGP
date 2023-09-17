@@ -70,54 +70,51 @@ ModalWindow::ModalWindow(QWidget *parent, QString Type) : QGroupBox(parent)
 
     if (Type == "CMYK")
     {
-        QString Cyan = QString("%1").arg(CurrentColor.cyan());
-        QString Magenta = QString("%1").arg(CurrentColor.magenta());
-        QString Yellow = QString("%1").arg(CurrentColor.yellow());
-        QString Key = QString("%1").arg(CurrentColor.black());
+        RecalculateColor(CurrentColor);
 
         QLabel* CyanInfo = new QLabel("Cyan: ", this);
         CyanInfo->setFont(QFont("Segoe UI Black",12));
         CyanInfo->setGeometry(20,100,100,40);
 
-        CyanInput = new QLineEdit(Cyan, this);
+        CyanInput = new QLineEdit(QString("%1").arg((int)(Cyan*255)), this);
         CyanInput->setFont(QFont("Segoe UI Black",12));
         CyanInput->setGeometry(140,100,120,40);
         CyanInput->setStyleSheet("background-color: #f0f0f0");
         CyanInput->setTextMargins(10,0,10,0);
-        CyanInput->setValidator(new QIntValidator(0,100,this));
+        CyanInput->setValidator(new QDoubleValidator(0.0,1.0,4,this));
 
         QLabel* MagentaInfo = new QLabel("Magenta: ", this);
         MagentaInfo->setFont(QFont("Segoe UI Black",12));
         MagentaInfo->setGeometry(20,160,120,40);
 
-        MagentaInput = new QLineEdit(Magenta, this);
+        MagentaInput = new QLineEdit(QString("%1").arg((int)(Magenta*255)), this);
         MagentaInput->setFont(QFont("Segoe UI Black",12));
         MagentaInput->setGeometry(140,160,120,40);
         MagentaInput->setStyleSheet("background-color: #f0f0f0");
         MagentaInput->setTextMargins(10,0,10,0);
-        MagentaInput->setValidator(new QIntValidator(0,100,this));
+        MagentaInput->setValidator(new QDoubleValidator(0.0,1.0,4,this));
 
         QLabel* YellowInfo = new QLabel("Yellow: ", this);
         YellowInfo->setFont(QFont("Segoe UI Black",12));
         YellowInfo->setGeometry(20,220,100,40);
 
-        YellowInput = new QLineEdit(Yellow, this);
+        YellowInput = new QLineEdit(QString("%1").arg((int)(Yellow*255)), this);
         YellowInput->setFont(QFont("Segoe UI Black",12));
         YellowInput->setGeometry(140,220,120,40);
         YellowInput->setStyleSheet("background-color: #f0f0f0");
         YellowInput->setTextMargins(10,0,10,0);
-        YellowInput->setValidator(new QIntValidator(0,100,this));
+        YellowInput->setValidator(new QDoubleValidator(0.0,1.0,4,this));
 
         QLabel* KeyInfo = new QLabel("Key: ", this);
         KeyInfo->setFont(QFont("Segoe UI Black",12));
         KeyInfo->setGeometry(20,280,100,40);
 
-        KeyInput = new QLineEdit(Key, this);
+        KeyInput = new QLineEdit(QString("%1").arg((int)(Key*255)), this);
         KeyInput->setFont(QFont("Segoe UI Black",12));
         KeyInput->setGeometry(140,280,120,40);
         KeyInput->setStyleSheet("background-color: #f0f0f0");
         KeyInput->setTextMargins(10,0,10,0);
-        KeyInput->setValidator(new QIntValidator(0,100,this));
+        KeyInput->setValidator(new QDoubleValidator(0.0,1.0,4,this));
 
         QPushButton* SendChanges = new QPushButton("Apply changes", this);
         SendChanges->setObjectName(QString("SendChangesCMYK"));
@@ -135,15 +132,13 @@ ModalWindow::ModalWindow(QWidget *parent, QString Type) : QGroupBox(parent)
 
     if (Type == "HSV")
     {
-        QString Hue = QString("%1").arg(CurrentColor.hue());
-        QString Saturation = QString("%1").arg(CurrentColor.saturation());
-        QString Value = QString("%1").arg(CurrentColor.value());
+        RecalculateColor(CurrentColor);
 
         QLabel* HueInfo = new QLabel("Hue: ", this);
         HueInfo->setFont(QFont("Segoe UI Black",12));
         HueInfo->setGeometry(20,100,100,40);
 
-        HueInput_1 = new QLineEdit(Hue, this);
+        HueInput_1 = new QLineEdit(QString("%1").arg(Hue_1), this);
         HueInput_1->setFont(QFont("Segoe UI Black",12));
         HueInput_1->setGeometry(140,100,120,40);
         HueInput_1->setStyleSheet("background-color: #f0f0f0");
@@ -154,7 +149,7 @@ ModalWindow::ModalWindow(QWidget *parent, QString Type) : QGroupBox(parent)
         SaturationInfo->setFont(QFont("Segoe UI Black",12));
         SaturationInfo->setGeometry(20,160,100,40);
 
-        SaturationInput_1 = new QLineEdit(Saturation, this);
+        SaturationInput_1 = new QLineEdit(QString("%1").arg(Saturation_1), this);
         SaturationInput_1->setFont(QFont("Segoe UI Black",12));
         SaturationInput_1->setGeometry(140,160,120,40);
         SaturationInput_1->setStyleSheet("background-color: #f0f0f0");
@@ -165,7 +160,7 @@ ModalWindow::ModalWindow(QWidget *parent, QString Type) : QGroupBox(parent)
         ValueInfo->setFont(QFont("Segoe UI Black",12));
         ValueInfo->setGeometry(20,220,100,40);
 
-        ValueInput = new QLineEdit(Value, this);
+        ValueInput = new QLineEdit(QString("%1").arg(Value), this);
         ValueInput->setFont(QFont("Segoe UI Black",12));
         ValueInput->setGeometry(140,220,120,40);
         ValueInput->setStyleSheet("background-color: #f0f0f0");
@@ -188,15 +183,13 @@ ModalWindow::ModalWindow(QWidget *parent, QString Type) : QGroupBox(parent)
 
     if (Type == "HLS")
     {
-        QString Hue = QString("%1").arg(CurrentColor.hue());
-        QString Saturation = QString("%1").arg(CurrentColor.saturation());
-        QString Lightness = QString("%1").arg(CurrentColor.lightness());
+        RecalculateColor(CurrentColor);
 
         QLabel* HueInfo = new QLabel("Hue: ", this);
         HueInfo->setFont(QFont("Segoe UI Black",12));
         HueInfo->setGeometry(20,100,100,40);
 
-        HueInput_2 = new QLineEdit(Hue, this);
+        HueInput_2 = new QLineEdit(QString("%1").arg(Hue_2), this);
         HueInput_2->setFont(QFont("Segoe UI Black",12));
         HueInput_2->setGeometry(140,100,120,40);
         HueInput_2->setStyleSheet("background-color: #f0f0f0");
@@ -207,7 +200,7 @@ ModalWindow::ModalWindow(QWidget *parent, QString Type) : QGroupBox(parent)
         SaturationInfo->setFont(QFont("Segoe UI Black",12));
         SaturationInfo->setGeometry(20,160,100,40);
 
-        SaturationInput_2 = new QLineEdit(Saturation, this);
+        SaturationInput_2 = new QLineEdit(QString("%1").arg(Saturation_2), this);
         SaturationInput_2->setFont(QFont("Segoe UI Black",12));
         SaturationInput_2->setGeometry(140,160,120,40);
         SaturationInput_2->setStyleSheet("background-color: #f0f0f0");
@@ -218,7 +211,7 @@ ModalWindow::ModalWindow(QWidget *parent, QString Type) : QGroupBox(parent)
         LightnessInfo->setFont(QFont("Segoe UI Black",12));
         LightnessInfo->setGeometry(20,220,100,40);
 
-        LightnessInput = new QLineEdit(Lightness, this);
+        LightnessInput = new QLineEdit(QString("%1").arg(Lightness), this);
         LightnessInput->setFont(QFont("Segoe UI Black",12));
         LightnessInput->setGeometry(140,220,120,40);
         LightnessInput->setStyleSheet("background-color: #f0f0f0");
@@ -352,11 +345,36 @@ void ModalWindow::ReceiveColor()
     RecalculateColor(CurrentColor);
 }
 
+void ModalWindow::SendColor(QColor* Color)
+{
+    ((MainWindow*)this->parent())->setColor(*Color);
+}
+
 void ModalWindow::RecalculateColor(QColor Color)
 {
     Red = Color.red();
     Green = Color.green();
     Blue = Color.blue();
+
+    // RGB - CMYK
+
+    Key = 1.0 - std::max({Red, Green, Blue})/255.0;
+    Cyan = (1.0 - Red/255.0 - Key)/(1.0 - Key);
+    Magenta = (1.0 - Green/255.0 - Key)/(1.0 - Key);
+    Yellow = (1.0 - Blue/255.0 - Key)/(1.0 - Key);
+    if (Key == 1.0) { Cyan = Magenta = Yellow = 0.0; }
+
+    // RGB - HSV
+
+    Hue_1 = Color.hsvHue();
+    Saturation_1 = Color.hsvSaturation();
+    Value = Color.value();
+
+    // RGB - HLS
+
+    Hue_2 = Color.hslHue();
+    Saturation_2 = Color.hslSaturation();
+    Lightness = Color.lightness();
 
     // RGB - XYZ
 
@@ -381,7 +399,7 @@ void ModalWindow::RecalculateColor(QColor Color)
 
 void ModalWindow::RecalculateColor_Slot()
 {
-    qDebug() << QObject::sender()->objectName();
 
-    RecalculateColor(CurrentColor);
+    // Нужно определить цвет и поменять его везде
+    // Для этого определяем от кого был отослан и получаем Color, потом отсылаем его остальным модулям
 }
