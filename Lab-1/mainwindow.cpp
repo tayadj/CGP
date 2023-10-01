@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 {
     setFixedSize(1440,900);
     setWindowTitle(QString("CGP-1"));
@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 
     Menu = new QGroupBox(this);
-    Menu->setGeometry(QRect(80,160,320,220));
+    Menu->setGeometry(QRect(80,160,320,520));
     Menu->setStyleSheet(QString("border-radius: 10px;"));
 
     MenuModals = new QPushButton(Menu);
@@ -52,6 +52,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
                                     "    background-color: #f8f8f8;"
                                     "}"));
     connect(MenuInfo,SIGNAL(clicked()),this,SLOT(MenuInfo_Slot()));
+
+
+
+    CurrentColorBox = new QGroupBox(Menu);
+    CurrentColorBox->setObjectName(QString("CurrentColorBox"));
+    CurrentColorBox->setGeometry(QRect(0,300,220,220));
+    CurrentColorBox->setStyleSheet(QString("background-color: " + CurrentColor.name()));
 
 
 
@@ -122,7 +129,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
                                                 "}"));
     connect(MenuModalsOptionsHSV,SIGNAL(clicked()),this,SLOT(MenuModalsOptions_Slot()));
 
-    MenuModalsOptionsHLS = new QPushButton("HLS", MenuModalsOptions);
+    MenuModalsOptionsHLS = new QPushButton("HSL", MenuModalsOptions);
     MenuModalsOptionsHLS->setObjectName(QString("MenuModalsOptionsHLS"));
     MenuModalsOptionsHLS->setFont(QFont("Segoe UI Black",12));
     MenuModalsOptionsHLS->setGeometry(40,180,220,100);
@@ -162,7 +169,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     connect(MenuModalsOptionsLAB,SIGNAL(clicked()),this,SLOT(MenuModalsOptions_Slot()));
 
 
-
     Modals = new QGroupBox(this);
     Modals->setGeometry(440,160,920,500);
     Modals->setStyleSheet(QString("border-radius: 0px;"));
@@ -171,15 +177,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 }
 
 MainWindow::~MainWindow()
-{
-}
-
-QColor MainWindow::getColor()
-{
-    return this->CurrentColor;
-}
-
-void MainWindow::setColor(QColor Color)
 {
 }
 
@@ -258,7 +255,7 @@ void MainWindow::MenuModalsOptions_Slot()
     }
     if (QObject::sender()->objectName() == "MenuModalsOptionsHLS")
     {
-        int Index = (*ModalList).indexOf(QString("HLS"));
+        int Index = (*ModalList).indexOf(QString("HSL"));
 
         if (Index == -1)
         {
@@ -268,7 +265,7 @@ void MainWindow::MenuModalsOptions_Slot()
             }
             else
             {
-                ModalList->push_back("HLS");
+                ModalList->push_back("HSL");
             }
         }
         if (Index != -1)
@@ -333,7 +330,7 @@ void MainWindow::MenuColor_Slot()
     if (Color.isValid())
     {
         this->CurrentColor = Color;
-        GenerateModals();
+        CurrentColorBox->setStyleSheet(QString("background-color: " + CurrentColor.name()));
     }
 }
 
@@ -350,32 +347,58 @@ void MainWindow::GenerateModals()
         if ((*ModalList)[i] == "RGB")
         {
             ModalWindow* Modal = new ModalWindow(this, "RGB");
+            Modal->setObjectName("Modal_RGB");
+            connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
         if ((*ModalList)[i] == "CMYK")
         {
             ModalWindow* Modal = new ModalWindow(this, "CMYK");
+            Modal->setObjectName("Modal_CMYK");
+            connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
         if ((*ModalList)[i] == "HSV")
         {
             ModalWindow* Modal = new ModalWindow(this, "HSV");
+            Modal->setObjectName("Modal_HSV");
+            connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
-        if ((*ModalList)[i] == "HLS")
+        if ((*ModalList)[i] == "HSL")
         {
-            ModalWindow* Modal = new ModalWindow(this, "HLS");
+            ModalWindow* Modal = new ModalWindow(this, "HSL");
+            Modal->setObjectName("Modal_HSL");
+            connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
         if ((*ModalList)[i] == "XYZ")
         {
             ModalWindow* Modal = new ModalWindow(this, "XYZ");
+            Modal->setObjectName("Modal_XYZ");
+            connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
         if ((*ModalList)[i] == "LAB")
         {
             ModalWindow* Modal = new ModalWindow(this, "LAB");
+            Modal->setObjectName("Modal_LAB");
+            connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
+    }
+}
+
+QColor MainWindow::SendColor()
+{
+    return this->CurrentColor;
+}
+
+void MainWindow::ReceiveColor(QColor Color)
+{
+    CurrentColor = Color;
+    CurrentColorBox->setStyleSheet(QString("background-color: " + CurrentColor.name()));
+    for (int i = 0; i < ModalLayout->count(); ++i) {
+        ((ModalWindow*)(ModalLayout->itemAt(i)->widget()))->ReceiveColor(CurrentColor);
     }
 }

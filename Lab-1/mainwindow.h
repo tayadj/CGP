@@ -8,46 +8,54 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    public:
+        MainWindow(QWidget *parent = nullptr);
+        ~MainWindow();
 
-    QColor                      getColor();
-    void                        setColor(QColor);
-    void                        GenerateModals();
+    public:
+        QColor                      SendColor();
 
-protected slots:
-    void                        MenuModals_Slot();
-    void                        MenuModalsOptions_Slot();
-    void                        MenuInfo_Slot();
-    void                        MenuColor_Slot();
+    protected slots:
+        void                        MenuModals_Slot();
+        void                        MenuModalsOptions_Slot();
+        void                        MenuInfo_Slot();
+        void                        MenuColor_Slot();
+        void                        ReceiveColor(QColor);
 
-private:
-    QColor                      CurrentColor;
+    protected:
+        void                        GenerateModals();
 
-    QGroupBox*                  Tab;
-    QLabel*                     Title;
+    private:
+        QColor                      CurrentColor = QColor(0,0,0);
+        QGroupBox*                  CurrentColorBox;
 
-    QGroupBox*                  Menu;
-    QPushButton*                MenuModals;
-    QPushButton*                MenuColor;
-    QPushButton*                MenuInfo;
+        QGroupBox*                  Tab;
+        QLabel*                     Title;
 
-    QGroupBox*                  Info;
-    QLabel*                     InfoTitle;
-    QLabel*                     InfoText;
+        QGroupBox*                  Menu;
+        QPushButton*                MenuModals;
+        QPushButton*                MenuColor;
+        QPushButton*                MenuInfo;
 
-    QGroupBox*                  MenuModalsOptions;
-    QPushButton*                MenuModalsOptionsRGB;
-    QPushButton*                MenuModalsOptionsCMYK;
-    QPushButton*                MenuModalsOptionsHSV;
-    QPushButton*                MenuModalsOptionsHLS;
-    QPushButton*                MenuModalsOptionsXYZ;
-    QPushButton*                MenuModalsOptionsLAB;
+        QGroupBox*                  Info;
+        QLabel*                     InfoTitle;
+        QLabel*                     InfoText;
 
-    QGroupBox*                  Modals;
-    QVector<QString>*           ModalList = new QVector<QString>;
-    QHBoxLayout*                ModalLayout;
+        QGroupBox*                  MenuModalsOptions;
+        QPushButton*                MenuModalsOptionsRGB;
+        QPushButton*                MenuModalsOptionsCMYK;
+        QPushButton*                MenuModalsOptionsHSV;
+        QPushButton*                MenuModalsOptionsHLS;
+        QPushButton*                MenuModalsOptionsXYZ;
+        QPushButton*                MenuModalsOptionsLAB;
+
+        QGroupBox*                  Modals;
+        QVector<QString>*           ModalList = new QVector<QString>;
+        QHBoxLayout*                ModalLayout;
+        ModalWindow*                Modal_1;
+        ModalWindow*                Modal_2;
+        ModalWindow*                Modal_3;
+
 };
 
 #endif
