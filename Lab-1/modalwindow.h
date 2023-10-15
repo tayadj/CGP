@@ -17,16 +17,17 @@ class ModalWindow : public QGroupBox
 
     signals:
         void                        SendColor(QColor);
+        void                        SliderMoved(QColor);
 
     protected slots:
         void                        LineEdit_1_Changed(bool = false);
         void                        LineEdit_2_Changed(bool = false);
         void                        LineEdit_3_Changed(bool = false);
         void                        LineEdit_4_Changed(bool = false);
-        /*void Slider_1_Moved();
-        void Slider_2_Moved();
-        void Slider_3_Moved();
-        void Slider_4_Moved();*/
+        void                        Slider_1_Moved();
+        void                        Slider_2_Moved();
+        void                        Slider_3_Moved();
+        void                        Slider_4_Moved();
 
     protected:
         void                        LineEdit_Changed(QLineEdit*, qint16, qint16, bool);
@@ -37,10 +38,10 @@ class ModalWindow : public QGroupBox
         QLineEdit*                  LineEdit_2;
         QLineEdit*                  LineEdit_3;
         QLineEdit*                  LineEdit_4;
-        /*QSlider*                    Slider_1;
+        QSlider*                    Slider_1;
         QSlider*                    Slider_2;
         QSlider*                    Slider_3;
-        QSlider*                    Slider_4;*/
+        QSlider*                    Slider_4;
         QLabel*                     Label_1;
         QLabel*                     Label_2;
         QLabel*                     Label_3;
@@ -66,6 +67,7 @@ class ModalWindow : public QGroupBox
         double                      L;
         double                      A;
         double                      B;
+        bool                        SliderRecalculation = false;
 
 };
 

@@ -170,7 +170,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 
 
     Modals = new QGroupBox(this);
-    Modals->setGeometry(440,160,920,500);
+    Modals->setGeometry(440,160,920,580);
     Modals->setStyleSheet(QString("border-radius: 0px;"));
 
     ModalLayout = new QHBoxLayout(Modals);
@@ -331,6 +331,7 @@ void MainWindow::MenuColor_Slot()
     {
         this->CurrentColor = Color;
         CurrentColorBox->setStyleSheet(QString("background-color: " + CurrentColor.name()));
+        GenerateModals();
     }
 }
 
@@ -349,6 +350,7 @@ void MainWindow::GenerateModals()
             ModalWindow* Modal = new ModalWindow(this, "RGB");
             Modal->setObjectName("Modal_RGB");
             connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
+            connect(Modal, SIGNAL(SliderMoved(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
         if ((*ModalList)[i] == "CMYK")
@@ -356,6 +358,7 @@ void MainWindow::GenerateModals()
             ModalWindow* Modal = new ModalWindow(this, "CMYK");
             Modal->setObjectName("Modal_CMYK");
             connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
+            connect(Modal, SIGNAL(SliderMoved(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
         if ((*ModalList)[i] == "HSV")
@@ -363,6 +366,7 @@ void MainWindow::GenerateModals()
             ModalWindow* Modal = new ModalWindow(this, "HSV");
             Modal->setObjectName("Modal_HSV");
             connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
+            connect(Modal, SIGNAL(SliderMoved(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
         if ((*ModalList)[i] == "HSL")
@@ -370,6 +374,7 @@ void MainWindow::GenerateModals()
             ModalWindow* Modal = new ModalWindow(this, "HSL");
             Modal->setObjectName("Modal_HSL");
             connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
+            connect(Modal, SIGNAL(SliderMoved(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
         if ((*ModalList)[i] == "XYZ")
@@ -377,6 +382,7 @@ void MainWindow::GenerateModals()
             ModalWindow* Modal = new ModalWindow(this, "XYZ");
             Modal->setObjectName("Modal_XYZ");
             connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
+            connect(Modal, SIGNAL(SliderMoved(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
         if ((*ModalList)[i] == "LAB")
@@ -384,6 +390,7 @@ void MainWindow::GenerateModals()
             ModalWindow* Modal = new ModalWindow(this, "LAB");
             Modal->setObjectName("Modal_LAB");
             connect(Modal, SIGNAL(SendColor(QColor)), this, SLOT(ReceiveColor(QColor)));
+            connect(Modal, SIGNAL(SliderMoved(QColor)), this, SLOT(ReceiveColor(QColor)));
             ModalLayout->addWidget(Modal);
         }
     }
