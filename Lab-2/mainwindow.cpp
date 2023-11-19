@@ -61,11 +61,7 @@ void Widget::on_listView_doubleClicked(const QModelIndex &index)
         {
              ui->FileName->setText(model->fileName(index));
              ui->Size->setText(QString::number(img.size().width() )+ "x" + QString::number(img.size().height() ));
-             if (a.compression() == -1) {
-                 ui->Contraction->setText(QString("Uncompresy"));
-             } else {
-                 ui->Contraction->setText("Compressed");
-             }
+             ui->Contraction->setText(QString::number((double)model->filePath(index).size()/(double)(img.size().width()*img.size().height())*100.0) + "%");
              ui->Color_depth->setText(QString::number(img.bitPlaneCount()));
              ui->Resolution->setText(QString::number(img.physicalDpiX()));
         }
@@ -129,12 +125,7 @@ void Widget::on_multiChoice_clicked()
         QImageWriter a(list[i].toLocalFile());
         twInfo->setItem(i, 1, new QTableWidgetItem(QString::number(im.size().width())+"x"+QString::number(im.size().height())));
         twInfo->setItem(i, 3, new QTableWidgetItem(QString::number(im.bitPlaneCount())));
-        if (a.compression() == -1) {
-            twInfo->setItem(i, 4, new QTableWidgetItem(QString("Uncompressed")));
-        } else {
-            twInfo->setItem(i, 4, new QTableWidgetItem(QString("Compressed")));
-        }
-
+        twInfo->setItem(i, 4, new QTableWidgetItem(QString::number((double)temp.size()/(double)(im.size().width()*im.size().height())*100.0) + "%"));
     }
     if (twInfo->rowCount() == 0)
     {
