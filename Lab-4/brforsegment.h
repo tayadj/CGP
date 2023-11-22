@@ -20,8 +20,8 @@ public:
         double w = this->width();
         h/=2;
         w/=2;
-        double hScale = 20; //this->height()/20;
-        double wScale = 20; //this->width()/20;
+        double hScale = 40;
+        double wScale = 40;
         painter1.translate(w,h);
         painter1.setPen(QPen(Qt::red, 3));
         painter1.setBrush(Qt::red);

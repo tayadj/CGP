@@ -13,25 +13,68 @@ MainWindow::MainWindow(QWidget *parent)
     connect(pbBrSegment, SIGNAL(clicked()), this, SLOT(showBrSegment()));
     connect(pbNaiveAlgorithm, SIGNAL(clicked()), this, SLOT(showNaive()));
     connect(pbDDA, SIGNAL(clicked()), this, SLOT(showDDA()));
-    this->setMinimumSize(500,600);
+
+    this->setMinimumSize(1080,720);
+    this->setStyleSheet("MainWindow {"
+                        "   background-color: #ffffff;"
+                        "   color: #42aaff;"
+                        "}"
+                        "QLabel {"
+                        "   color: #42aaff;"
+                        "}"
+                        "#Button {"
+                        "   background-color: #42aaff;"
+                        "   color: #ffffff;"
+                        "   border-radius: 5px;"
+                        "}"
+                        "#Button::hover {"
+                        "   background-color: #ffffff;"
+                        "   color: #42aaff;"
+                        "   border-radius: 5px;"
+                        "}");
+
+
     ui->setupUi(this);
-    d = new Dialog(circle);
-    lText->setText("Choose algorithm");
-    pbBrCircle->setText("Bresenham's circle Algorithm");
-    pbBrSegment->setText("Bresenham's segment Algorithm");
+
+
+    pbBrCircle->setText("Bresenham's - circle");
+    pbBrCircle->setObjectName("Button");
+    pbBrCircle->setFixedSize(QSize(260,40));
+    pbBrCircle->setFont(QFont("Segoe UI Black", 10, 900));
+
+    pbBrSegment->setText("Bresenham's - segment");
+    pbBrSegment->setObjectName("Button");
+    pbBrSegment->setFixedSize(QSize(260,40));
+    pbBrSegment->setFont(QFont("Segoe UI Black", 10, 900));
+
     pbNaiveAlgorithm->setText("Naive algorithm");
-    pbDDA->setText("DDA");
+    pbNaiveAlgorithm->setObjectName("Button");
+    pbNaiveAlgorithm->setFixedSize(QSize(260,40));
+    pbNaiveAlgorithm->setFont(QFont("Segoe UI Black", 10, 900));
+
+    pbDDA->setText("DD - Algorithm");
+    pbDDA->setObjectName("Button");
+    pbDDA->setFixedSize(QSize(260,40));
+    pbDDA->setFont(QFont("Segoe UI Black", 10, 900));
+
+    lText->setText("Choose algorithm");
     lText->setAlignment(Qt::AlignCenter);
+    lText->setFont(QFont("Segoe UI Black", 10, 900));
+
+    d = new Dialog(circle);
+
     l->addWidget(lText, 0, 0, 1, 4);
     l->addWidget(pbBrCircle, 11,0,1,1);
     l->addWidget(pbBrSegment, 11,1,1,1);
     l->addWidget(pbNaiveAlgorithm, 11,2,1,1);
     l->addWidget(pbDDA, 11,3,1,1);
     l->addWidget(dda,1,0,10,4);
+
     dda->hide();
     naive->hide();
     brfc->hide();
     brfs->hide();
+
     ui->centralwidget->setLayout(l);
 }
 

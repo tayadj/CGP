@@ -32,21 +32,4 @@ DDA::DDA(int x1, int y1, int x2, int y2, QWidget *parent ): QWidget(parent)
        x=x+dX;
        y=y+dY;
     }
-    /*
-    int length = fmax(deltaX, deltaY);if (length == 0)
-    {
-        p.setX(x1);
-        p.setY(y1);
-        points.push_back(p);
-        return;
-    }
-    length++;
-    while (length--)
-    {
-        x += dX;
-        y += dY;
-        p.setX(roundf(x));
-        p.setY(roundf(y));
-        points.push_back(p);
-    }*/
 }
