@@ -1,10 +1,8 @@
 #ifndef TARGET_H
 #define TARGET_H
 
-#include <QWidget>
-#include <QPainter>
-#include <vector>
-#include <QPainterPath>
+#include "qpainterpath.h"
+#include <QtWidgets>
 
 class BrForCircle : public QWidget
 {
@@ -67,4 +65,4 @@ class BrForCircle : public QWidget
         int radius;
 };
 
-#endif // TARGET_H
+#endif

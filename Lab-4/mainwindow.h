@@ -6,7 +6,6 @@
 #include <brforcircle.h>
 #include <dialog.h>
 #include <dda.h>
-#include <QtWidgets>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,4 +40,5 @@ class MainWindow : public QMainWindow
         QPushButton                 *pbDDA = new QPushButton;
         Dialog                      *d;
 };
+
 #endif

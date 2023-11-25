@@ -1,9 +1,7 @@
 #ifndef DIALOG_H
 #define DIALOG_H
-#include <QDialog>
-#include <QGridLayout>
-#include <QLineEdit>
-#include <QLabel>
+
+#include <QtWidgets>
 
 enum dialogType{
     segment,
@@ -37,20 +35,60 @@ private:
     QLineEdit *leRadius = new QLineEdit;
 private slots:
     void setX0(){
+        if (leX0->text().toInt() > 9) {
+            p0.setX(9);
+            return;
+        }
+        if (leX0->text().toInt() < -9) {
+            p0.setX(-9);
+            return;
+        }
         p0.setX(leX0->text().toInt());
     }
     void setX1(){
+        if (leX1->text().toInt() > 9) {
+            p1.setX(9);
+            return;
+        }
+        if (leX1->text().toInt() < -9) {
+            p1.setX(-9);
+            return;
+        }
         p1.setX(leX1->text().toInt());
     }
     void setY0(){
+        if (leY0->text().toInt() > 9) {
+            p0.setY(9);
+            return;
+        }
+        if (leY0->text().toInt() < -9) {
+            p0.setY(-9);
+            return;
+        }
         p0.setY(leY0->text().toInt());
     }
     void setY1(){
+        if (leY1->text().toInt() > 9) {
+            p1.setY(9);
+            return;
+        }
+        if (leY1->text().toInt() < -9) {
+            p1.setY(-9);
+            return;
+        }
         p1.setY(leY1->text().toInt());
     }
     void setRadius(){
+        if (leRadius->text().toInt() > 7) {
+            radius = 7;
+            return;
+        }
+        if (leY0->text().toInt() < 0) {
+            radius = 0;
+            return;
+        }
         radius = leRadius->text().toInt();
     }
 };
 
-#endif // DIALOG_H
+#endif
