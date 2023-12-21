@@ -64,9 +64,9 @@ public:
 public:
     letter(QWidget *parent = nullptr);
 
-    static const int vertices = 12;
+    static const int vertices = 68;
     static const int shapeSides = 4;
-    static const int shapesNum = 10;
+    static const int shapesNum = 52;
     static const int indexPoints = shapesNum * shapeSides;
 
     GLfloat** VertexArray = nullptr;
