@@ -6,23 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
 
-    setFont(QFont("Segoe UI Black"));
-    setStyleSheet("QMainWindow {"
-                  " background-color: #ffffff;"
-                  "}"
-                  ""
-                  "QPushButton {"
-                  " background-color: #42aaff;"
-                  " color: #ffffff;"
-                  " border-radius: 5px;"
-                  "}"
-                  "QPushButton::hover {"
-                  " background-color: #ffffff;"
-                  " color: #42aaff;"
-                  " border-radius: 5px;"
-                  "}");
+    ui->setupUi(this);
 }
 
 MainWindow::~MainWindow()
@@ -124,7 +109,7 @@ void MainWindow::on_pushButton_10_clicked()
 void MainWindow::on_pushButton_11_clicked()
 {
 
-    QMessageBox::information(this,"Control keys","To interact with letter you can use your mouse or keyboard \n \n"
+    QMessageBox::information(this,"Control keys","To interact with letter you can use your mouse or keyboard \n \n "
                                   "To zoom in press + \n \n"
                                                  "To zoom out press - \n \n"
                                                  "To rotate up press w \n \n"
